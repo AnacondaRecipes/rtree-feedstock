@@ -7,6 +7,8 @@ package:
 source:
   url: https://pypi.io/packages/source/R/Rtree/Rtree-{{ version }}.tar.gz
   sha256: cae327e2c03b3da4ea40d0fdf68f3e55fe9f302c56b9f31e1bfeb36dbea73f44
+  patches:
+    - 0001-load-library-from-library-bin-on-Windows.patch  # [win]
 
 build:
   number: 1
