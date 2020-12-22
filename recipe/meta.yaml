@@ -1,4 +1,4 @@
-{% set version = "0.9.4" %}
+{% set version = "0.9.6" %}
 
 package:
   name: rtree
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/R/Rtree/Rtree-{{ version }}.tar.gz
-  sha256: cae327e2c03b3da4ea40d0fdf68f3e55fe9f302c56b9f31e1bfeb36dbea73f44
+  sha256: 515b5b3d0942fcdb057a95c365b31a0f9b6b50bc5d03c865488571174409ba18
   patches:
     - 0001-load-library-from-library-bin-on-Windows.patch  # [win]
 
