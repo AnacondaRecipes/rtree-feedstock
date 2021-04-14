@@ -1,0 +1,16 @@
+diff --git a/rtree/finder.py b/rtree/finder.py
+index 051cd4f..4424acb 100644
+--- a/rtree/finder.py
++++ b/rtree/finder.py
+@@ -41,9 +41,8 @@ def load():
+         lib_name = 'spatialindex_c-{}.dll'.format(arch)
+ 
+         # add search paths for conda installs
+-        if 'conda' in sys.version:
+-            _candidates.append(
+-                os.path.join(sys.prefix, "Library", "bin"))
++        _candidates.append(
++            os.path.join(sys.prefix, "Library", "bin"))
+ 
+         # get the current PATH
+         oldenv = os.environ.get('PATH', '').strip().rstrip(';')
