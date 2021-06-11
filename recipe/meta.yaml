@@ -16,6 +16,8 @@ build:
   script: "{{ PYTHON }} -m pip install . --no-deps -vv"  # [not win]
 
 requirements:
+  build:
+    - python
   host:
     - python
     - pip
