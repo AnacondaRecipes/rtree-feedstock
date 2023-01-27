@@ -30,8 +30,9 @@ requirements:
     - typing_extensions >=3.7  # [py<38]
 
 test:
-  imports:
-    - rtree
+  # Imports are in run_test.py
+  #imports:
+  #  - rtree
   requires:
     - pip
     - typing_extensions >=3.7  # [py<38]
