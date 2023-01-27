@@ -7,17 +7,16 @@ package:
 source:
   url: https://pypi.io/packages/source/R/Rtree/Rtree-{{ version }}.tar.gz
   sha256: 222121699c303a64065d849bf7038b1ecabc37b65c7fa340bedb38ef0e805429
-  patches:
-    - 0002-load-library-from-library-bin-on-Windows.patch  # [win]
+  #patches:
+  #  - 0002-load-library-from-library-bin-on-Windows.patch  # [win]
 
 build:
   number: 0
-  skip: True  # [py<37 or (win and vc<14)]
+  # libspatialindex isn't available on s390x
+  skip: True  # [py<37 or (win and vc<14) or s390x]
   script: {{ PYTHON }} -m pip install . --no-deps -vv  # [not win]
 
 requirements:
-  build:
-    - m2-patch  # [win]
   host:
     - python
     - pip
@@ -35,6 +34,7 @@ test:
     - rtree
   requires:
     - pip
+    - typing_extensions >=3.7  # [py<38]
   commands:
     - pip check
 
