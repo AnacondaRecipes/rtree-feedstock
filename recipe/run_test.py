@@ -3,6 +3,7 @@ try:
     import cPickle as pickle
 except ImportError:
     import pickle
+import rtree
 from rtree import index
 from rtree.index import Rtree
 

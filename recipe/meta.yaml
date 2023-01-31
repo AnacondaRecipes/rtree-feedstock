@@ -1,4 +1,4 @@
-{% set version = "0.9.7" %}
+{% set version = "1.0.1" %}
 
 package:
   name: rtree
@@ -6,36 +6,48 @@ package:
 
 source:
   url: https://pypi.io/packages/source/R/Rtree/Rtree-{{ version }}.tar.gz
-  sha256: be8772ca34699a9ad3fb4cfe2cfb6629854e453c10b3328039301bbfc128ca3e
-  patches:
-    - 0002-load-library-from-library-bin-on-Windows.patch  # [win]
+  sha256: 222121699c303a64065d849bf7038b1ecabc37b65c7fa340bedb38ef0e805429
 
 build:
-  number: 1
-  skip: True  # [win and vc<14]
-  script: "{{ PYTHON }} -m pip install . --no-deps -vv"  # [not win]
+  number: 0
+  # libspatialindex isn't available on s390x
+  skip: True  # [py<37 or (win and vc<14) or s390x]
+  script: {{ PYTHON }} -m pip install . --no-deps -vv  # [not win]
 
 requirements:
-  build:
-    - python
-    - m2-patch  # [win]
   host:
     - python
     - pip
     - libspatialindex
+    - setuptools
+    - wheel
   run:
     - python
-    - libspatialindex
+    # https://github.com/Toblerity/rtree/blob/67991022577d5e7c50787380ccee211c846c74cc/DEPENDENCIES.txt#L3
+    - libspatialindex >=1.8.5
+    - typing_extensions >=3.7  # [py<38]
 
 test:
-  imports:
-    - rtree
+  # Imports are in run_test.py
+  #imports:
+  #  - rtree
+  requires:
+    - pip
+    - typing_extensions >=3.7  # [py<38]
+  commands:
+    - pip check
 
 about:
-  home: http://toblerity.github.com/rtree/
+  home: https://github.com/Toblerity/rtree
   license: MIT
+  license_family: MIT
   license_file: LICENSE.txt
-  summary: 'R-Tree spatial index for Python GIS'
+  summary: R-Tree spatial index for Python GIS
+  description: |
+    Rtree is a ctypes Python wrapper of libspatialindex 
+    that provides a number of advanced spatial indexing features for the spatially curious Python user. 
+  dev_url: https://github.com/Toblerity/rtree
+  doc_url: https://rtree.readthedocs.io/en/latest/
 
 extra:
   recipe-maintainers:
