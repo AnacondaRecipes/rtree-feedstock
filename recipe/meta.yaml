@@ -12,6 +12,8 @@ source:
 build:
   number: 0
   skip: True  # [py<39 or (win and vc<14)]
+  # No need to set special variables for the DLL library path, as current version of the package will already look for the
+  # dynamic library in conda path when using conda: https://github.com/Toblerity/rtree/blob/1.4.1/rtree/finder.py#L39
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
