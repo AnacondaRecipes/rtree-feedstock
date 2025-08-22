@@ -18,14 +18,13 @@ requirements:
   host:
     - python
     - pip
-    - libspatialindex
-    - setuptools
+    - setuptools >=61
     - wheel
   run:
     - python
-    # https://github.com/Toblerity/rtree/blob/67991022577d5e7c50787380ccee211c846c74cc/DEPENDENCIES.txt#L3
+    # Dependencies described here:
+    # https://github.com/Toblerity/rtree/blob/1.4.1/DEPENDENCIES.txt
     - libspatialindex >=1.8.5
-    - typing_extensions >=3.7  # [py<38]
 
 test:
   # Imports are in run_test.py
@@ -33,7 +32,6 @@ test:
   #  - rtree
   requires:
     - pip
-    - typing_extensions >=3.7  # [py<38]
   commands:
     - pip check
 
