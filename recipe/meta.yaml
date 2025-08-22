@@ -20,6 +20,7 @@ requirements:
     - pip
     - setuptools >=61
     - wheel
+    - libspatialindex
   run:
     - python
     # Dependencies described here:
@@ -30,10 +31,15 @@ test:
   # Imports are in run_test.py
   #imports:
   #  - rtree
+  source_files:
+    - tests
   requires:
     - pip
+    - pytest >=6
+    - numpy
   commands:
     - pip check
+    - pytest -vv tests
 
 about:
   home: https://github.com/Toblerity/rtree
