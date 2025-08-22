@@ -39,7 +39,7 @@ test:
     - numpy
   commands:
     - pip check
-    - pytest -vv tests
+    - pytest --import-mode=importlib -vv tests
 
 about:
   home: https://github.com/Toblerity/rtree
