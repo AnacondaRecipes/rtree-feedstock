@@ -31,8 +31,6 @@ requirements:
 
 test:
   # Imports are in run_test.py
-  #imports:
-  #  - rtree
   source_files:
     - tests
   requires:
