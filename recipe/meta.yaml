@@ -1,41 +1,45 @@
-{% set version = "1.0.1" %}
+{% set name = "rtree" %}
+{% set version = "1.4.1" %}
 
 package:
-  name: rtree
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/R/Rtree/Rtree-{{ version }}.tar.gz
-  sha256: 222121699c303a64065d849bf7038b1ecabc37b65c7fa340bedb38ef0e805429
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: c6b1b3550881e57ebe530cc6cffefc87cd9bf49c30b37b894065a9f810875e46
 
 build:
   number: 0
-  # libspatialindex isn't available on s390x
-  skip: True  # [py<37 or (win and vc<14) or s390x]
-  script: {{ PYTHON }} -m pip install . --no-deps -vv  # [not win]
+  skip: True  # [py<39]
+  # No need to set special variables for the DLL library path, as current version of the package will already look for the
+  # dynamic library in conda path when using conda: https://github.com/Toblerity/rtree/blob/1.4.1/rtree/finder.py#L39
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
     - python
     - pip
-    - libspatialindex
-    - setuptools
+    - setuptools >=61
     - wheel
+    - libspatialindex {{ libspatialindex }}
   run:
     - python
-    # https://github.com/Toblerity/rtree/blob/67991022577d5e7c50787380ccee211c846c74cc/DEPENDENCIES.txt#L3
+    # Dependencies described here:
+    # https://github.com/Toblerity/rtree/blob/1.4.1/DEPENDENCIES.txt
     - libspatialindex >=1.8.5
-    - typing_extensions >=3.7  # [py<38]
 
 test:
   # Imports are in run_test.py
-  #imports:
-  #  - rtree
+  source_files:
+    - tests
   requires:
     - pip
-    - typing_extensions >=3.7  # [py<38]
+    - pytest >=6
+    - numpy
   commands:
     - pip check
+    - pytest --import-mode=importlib -vv tests
 
 about:
   home: https://github.com/Toblerity/rtree
@@ -47,7 +51,7 @@ about:
     Rtree is a ctypes Python wrapper of libspatialindex 
     that provides a number of advanced spatial indexing features for the spatially curious Python user. 
   dev_url: https://github.com/Toblerity/rtree
-  doc_url: https://rtree.readthedocs.io/en/latest/
+  doc_url: https://rtree.readthedocs.io
 
 extra:
   recipe-maintainers:
