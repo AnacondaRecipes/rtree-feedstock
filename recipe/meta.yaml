@@ -11,8 +11,7 @@ source:
 
 build:
   number: 0
-  # libspatialindex isn't available on s390x
-  skip: True  # [py<37 or (win and vc<14) or s390x]
+  skip: True  # [py<37 or (win and vc<14)]
   script: {{ PYTHON }} -m pip install . --no-deps -vv  # [not win]
 
 requirements:
