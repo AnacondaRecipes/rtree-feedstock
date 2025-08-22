@@ -12,7 +12,7 @@ source:
 build:
   number: 0
   skip: True  # [py<39 or (win and vc<14)]
-  script: {{ PYTHON }} -m pip install . --no-deps -vv  # [not win]
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv  # [not win]
 
 requirements:
   host:
@@ -51,7 +51,7 @@ about:
     Rtree is a ctypes Python wrapper of libspatialindex 
     that provides a number of advanced spatial indexing features for the spatially curious Python user. 
   dev_url: https://github.com/Toblerity/rtree
-  doc_url: https://rtree.readthedocs.io/en/latest/
+  doc_url: https://rtree.readthedocs.io
 
 extra:
   recipe-maintainers:
