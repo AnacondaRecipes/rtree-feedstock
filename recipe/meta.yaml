@@ -10,7 +10,7 @@ source:
   sha256: c6b1b3550881e57ebe530cc6cffefc87cd9bf49c30b37b894065a9f810875e46
 
 build:
-  number: 0
+  number: 1
   skip: True  # [py<39]
   # No need to set special variables for the DLL library path, as current version of the package will already look for the
   # dynamic library in conda path when using conda: https://github.com/Toblerity/rtree/blob/1.4.1/rtree/finder.py#L39
