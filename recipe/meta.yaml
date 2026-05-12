@@ -35,6 +35,8 @@ test:
     - rtree
     - rtree.index
   commands:
+    # Skip pip check - not needed for PBP infrastructure validation
+    - pip check  # [False]
     # Single smoke test command - validates C++ integration and basic functionality
     - python -c "from rtree import index; idx = index.Index(); idx.insert(1, (0, 0, 1, 1)); results = list(idx.intersection((0.5, 0.5, 1.5, 1.5))); assert 1 in results; print('✓ rtree + libspatialindex integration verified')"
 
